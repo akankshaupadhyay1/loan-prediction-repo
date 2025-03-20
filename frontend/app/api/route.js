@@ -1,38 +1,42 @@
-
-// app/api/route.js (API Route)
+// app/api/route.js
 import { NextResponse } from 'next/server';
-// import joblib from 'joblib';
-import pandas from 'pandas-js';
-
-let model; // Declare model outside the handler
-let preprocessor;
-
-try {
-    model = joblib.load('loan_pricing_model.pkl');
-    preprocessor = model.named_steps.preprocessor;
-} catch (error) {
-    console.error("Error loading model:", error);
-    // Handle the error appropriately, e.g., exit the process
-    process.exit(1); // Or throw an error if appropriate for your setup
-}
-
-
+import axios from 'axios';
 
 export async function POST(request) {
-  try {
-    const data = await request.json();
+    try {
+        const data = await request.json();
 
-    const input_df = pandas.DataFrame([data]);
+        // Get the backend URL from environment variables or use a default
+        const backendUrl = process.env.BACKEND_URL || 'http://backend:8000/predict';
 
-    const transformed_data = preprocessor.transform(input_df)
+        // Send the data to the backend API
+        const response = await axios.post(backendUrl, data);
 
-    const prediction = model.predict(transformed_data)[0];
+        // Assuming the backend returns a JSON with a 'prediction' field
+        const prediction = response.data.prediction;
 
-    const output = { ...data, LoanRate: prediction };
+        // Construct the output JSON
+        const output = { ...data, LoanRate: prediction };
 
-    return NextResponse.json(output);
-  } catch (error) {
-    console.error("API Error:", error);
-    return NextResponse.json({ detail: error.message }, { status: 400 });
-  }
+        // Return the JSON response
+        return NextResponse.json(output);
+
+    } catch (error) {
+        console.error("API Error:", error);
+
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.error("Backend Error:", error.response.data);
+            return NextResponse.json({ detail: error.response.data }, { status: error.response.status });
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.error("No response from backend:", error.request);
+            return NextResponse.json({ detail: "No response from backend" }, { status: 500 });
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error("Error setting up request:", error.message);
+            return NextResponse.json({ detail: error.message }, { status: 500 });
+        }
+    }
 }

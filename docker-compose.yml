@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  frontend:
+    image: loan-predict-frontend:latest
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+  backend:
+    image: loan-predict-backend:latest
+    ports:
+      - "8000:8000" # Or whatever port your backend uses.
