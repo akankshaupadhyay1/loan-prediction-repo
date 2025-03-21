@@ -1,12 +1,24 @@
 version: "3.8"
+
 services:
-  frontend:
-    image: loan-predict-frontend:latest
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: loan-predict-backend:latest
+    container_name: loan-predict-backend
     ports:
-      - "80:80"
+      - "8000:8000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: loan-predict-frontend:latest
+    container_name: loan-predict-frontend
+    ports:
+      - "3000:3000" #Correct port mapping for Next.js
     depends_on:
       - backend
-  backend:
-    image: loan-predict-backend:latest
-    ports:
-      - "8000:8000" # Or whatever port your backend uses.
+    restart: unless-stopped
