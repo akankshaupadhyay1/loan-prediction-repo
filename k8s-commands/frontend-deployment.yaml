@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loan-predict-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loan-predict-frontend
+  template:
+    metadata:
+      labels:
+        app: loan-predict-frontend
+    spec:
+      containers:
+        - name: loan-predict-frontend-container
+          image: uakansha1/loan-predict-frontend:latest
+                    imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env: # Add this section
+            - name: NEXT_PUBLIC_BACKEND_NAMESPACE
+              value: "default" # Or your backend service's namespace

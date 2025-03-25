@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loan-predict-backend-service
+spec:
+  type: ClusterIP # Or NodePort
+  selector:
+    app: loan-predict-backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

@@ -7,7 +7,8 @@ export async function POST(request) {
         const data = await request.json();
 
         // Get the backend URL from environment variables or use a default
-        const backendUrl = process.env.BACKEND_URL || 'http://backend:8000/predict';
+        const backendUrl = 'http://loan-predict-backend-service:8000/predict';
+
 
         // Send the data to the backend API
         const response = await axios.post(backendUrl, data);

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loan-predict-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loan-predict-frontend
+  template:
+    metadata:
+      labels:
+        app: loan-predict-frontend
+    spec:
+      containers:
+        - name: loan-predict-frontend-container
+          image: uakansha1/loan-predict-frontend:latest
+          ports:
+            - containerPort: 3000
+      # Add depends_on behavior by using initContainers
+      initContainers:
+        - name: wait-for-backend
+          image: busybox:1.28 # or any small image with wget or curl
+          command: ['sh', '-c', 'until wget --quiet --tries=1 http://loan-predict-backend-service:8000; do echo waiting for backend; sleep 5; done;']

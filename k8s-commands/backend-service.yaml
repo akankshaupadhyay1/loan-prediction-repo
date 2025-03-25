@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: loan-predict-backend-service
+  namespace: default # Add this line, or use your specific namespace
+spec:
+  type: ClusterIP # Or NodePort, as needed
+  selector:
+    app: loan-predict-backend
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

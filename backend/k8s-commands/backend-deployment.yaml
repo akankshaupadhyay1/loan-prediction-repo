@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loan-predict-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loan-predict-backend
+  template:
+    metadata:
+      labels:
+        app: loan-predict-backend
+    spec:
+      containers:
+        - name: loan-predict-backend-container
+          image: uakansha1/loan-predict-backend:latest
+          ports:
+            - containerPort: 8000

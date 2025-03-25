@@ -16,6 +16,7 @@ export default function HomePage() {
     LoanTerm: ''
   });
 
+  const [error, setError] = useState(null); // State for error messages
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -24,18 +25,29 @@ export default function HomePage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null); // Reset error before making the request
     try {
-      const response = await axios.post('http://127.0.0.1:8000/predict', formData);
+      const response = await axios.post(
+        'http://loan-predict-backend-service.default.svc.cluster.local:8000/predict', // Kubernetes service URL
+        formData
+      );
+
+      if (response.status !== 200) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
       localStorage.setItem('loan_rate', response.data.loan_rate);
       router.push('/result');
-    } catch (error) {
-      alert('Error: ' + error.response.data.detail);
+    } catch (err) {
+      console.error('API request error:', err); // Log the full error
+      setError(err.response?.data?.detail || err.message || 'An unexpected error occurred.'); //set error message
     }
   };
 
   return (
     <div>
       <h1>Loan Prediction Form</h1>
+      {error && <div style={{ color: 'red' }}>{error}</div>} {/* Display error message */}
       <form onSubmit={handleSubmit}>
         {Object.keys(formData).map((key) => (
           <input
