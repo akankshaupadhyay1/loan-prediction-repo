@@ -1,24 +1,24 @@
 version: "3.8"
 
 services:
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    image: loan-predict-backend:latest
-    container_name: loan-predict-backend
-    ports:
-      - "8000:8000"
-    restart: unless-stopped
-
   frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    image: loan-predict-frontend:latest
+    image: uakansha1/loan-predict-frontend:latest
     container_name: loan-predict-frontend
     ports:
-      - "3000:3000" #Correct port mapping for Next.js
+      - "3000:3000"
+    restart: always
     depends_on:
       - backend
-    restart: unless-stopped
+    environment:
+      # Full URL including the /predict endpoint
+      - NEXT_PUBLIC_BACKEND_URL=https://loan-app1-g9bgh3fmhfa4fafh.centralindia-01.azurewebsites.net/predict
+  
+  backend:
+    image: uakansha1/loan-predict-backend:latest
+    container_name: loan-predict-backend
+    ports:
+      - "8000:8000"  # Keep default Uvicorn port
+    restart: always
+    environment:
+      # Uvicorn is running on port 8000
+      - PORT=8000

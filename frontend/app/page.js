@@ -19,6 +19,9 @@ export default function HomePage() {
   const [error, setError] = useState(null); // State for error messages
   const router = useRouter();
 
+  // Use the backend URL from env variables or fallback to localhost for development
+  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -28,7 +31,7 @@ export default function HomePage() {
     setError(null); // Reset error before making the request
     try {
       const response = await axios.post(
-        'http://loan-predict-backend-service.default.svc.cluster.local:8000/predict', // Kubernetes service URL
+        `${backendURL}/predict`, // Use environment variable or fallback
         formData
       );
 
@@ -40,7 +43,7 @@ export default function HomePage() {
       router.push('/result');
     } catch (err) {
       console.error('API request error:', err); // Log the full error
-      setError(err.response?.data?.detail || err.message || 'An unexpected error occurred.'); //set error message
+      setError(err.response?.data?.detail || err.message || 'An unexpected error occurred.'); // Set error message
     }
   };
 
