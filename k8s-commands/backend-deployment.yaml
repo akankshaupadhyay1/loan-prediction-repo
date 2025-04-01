@@ -15,8 +15,8 @@ spec:
       containers:
         - name: loan-predict-backend-container
           image: uakansha1/loan-predict-backend:latest
-                    imagePullPolicy: IfNotPresent
+                    # imagePullPolicy: IfNotPresent
         
           ports:
-            - containerPort: 8000
+            - containerPort: 80
                       

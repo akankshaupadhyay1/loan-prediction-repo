@@ -14,10 +14,11 @@ spec:
     spec:
       containers:
         - name: loan-predict-frontend-container
-          image: uakansha1/loan-predict-frontend:latest
-                    imagePullPolicy: IfNotPresent
+          image: uakansha1/loan-predict-frontend:v1
+          imagePullPolicy: Always  # Fixed indentation
+          
           ports:
             - containerPort: 3000
-          env: # Add this section
-            - name: NEXT_PUBLIC_BACKEND_NAMESPACE
-              value: "default" # Or your backend service's namespace
+          # env: # Add this section
+            # - name: NEXT_PUBLIC_BACKEND_NAMESPACE
+              # value: "default" # Or your backend service's namespace

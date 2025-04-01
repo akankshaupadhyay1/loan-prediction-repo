@@ -20,7 +20,8 @@ export default function HomePage() {
   const router = useRouter();
 
   // Use the backend URL from env variables or fallback to localhost for development
-  const backendURL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
+  const backendURL = "http://loan-predict-backend-service.default.svc.cluster.local:8000"
+  //process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:8000';
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

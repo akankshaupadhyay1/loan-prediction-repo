@@ -1,0 +1,127 @@
+[33mcommit 47799009e5acb09df679e5f7fc901fb5e5269069[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: akanksha upadhyay <uakansha1@gmail.com>
+Date:   Thu Mar 27 14:30:41 2025 +0530
+
+     changes in env url
+
+ backend/dockerfile        | 13 [32m+++++++[m[31m-[m
+ create-ci-cd-pipeline.txt | 76 [31m-----------------------------------------------[m
+ docker-compose.yml        | 32 [32m++++++++++[m[31m----------[m
+ frontend/app/page.js      |  9 [32m++++[m[31m--[m
+ 4 files changed, 34 insertions(+), 96 deletions(-)
+
+[33mcommit 8cbeb54bc6621938d6f5539707ed8e0f7ce752cf[m
+Author: akanksha upadhyay <uakansha1@gmail.com>
+Date:   Tue Mar 25 17:31:13 2025 +0530
+
+    Add Docker build and deploy pipeline
+
+ backend/k8s-commands/backend-deployment.yaml  | 19 [32m+++++++++++++++++++[m
+ backend/k8s-commands/backend-service.yaml     | 12 [32m++++++++++++[m
+ backend/k8s-commands/frontend-deployment.yaml | 24 [32m++++++++++++++++++++++++[m
+ backend/k8s-commands/frontend-service.yaml    | 12 [32m++++++++++++[m
+ frontend/app/api/route.js                     |  3 [32m++[m[31m-[m
+ frontend/app/page.js                          | 20 [32m++++++++++++++++[m[31m----[m
+ frontend/dockerfile                           | 25 [32m+++++++++++++++[m[31m----------[m
+ k8s-commands/backend-deployment.yaml          | 22 [32m++++++++++++++++++++++[m
+ k8s-commands/backend-service.yaml             | 13 [32m+++++++++++++[m
+ k8s-commands/frontend-deployment.yaml         | 23 [32m+++++++++++++++++++++++[m
+ k8s-commands/frontend-service.yaml            | 13 [32m+++++++++++++[m
+ k8s-commands/kubectl                          |  0
+ package-lock.json                             |  6 [31m------[m
+ 13 files changed, 171 insertions(+), 21 deletions(-)
+
+[33mcommit e89ca2ef20d85b98f076bfa7ece2b31dffb882a6[m
+Author: akanksha upadhyay <uakansha1@gmail.com>
+Date:   Fri Mar 21 12:10:08 2025 +0530
+
+     docker images and container is built and my app is working properly now i am going to built web app in azure
+
+ backend/dockerfile  |  2 [32m+[m[31m-[m
+ docker-compose.yml  | 22 [32m+++++++++++++++++[m[31m-----[m
+ frontend/dockerfile | 29 [32m++++++++++++++++++++++++[m[31m-----[m
+ frontend/nginx.conf |  1 [31m-[m
+ nginx.conf          | 21 [31m---------------------[m
+ 5 files changed, 42 insertions(+), 33 deletions(-)
+
+[33mcommit 4b9531bf70fa1e5333251c9959ae2abd69d7a03f[m
+Author: akanksha upadhyay <uakansha1@gmail.com>
+Date:   Thu Mar 20 15:59:01 2025 +0530
+
+     add docker files and delete pandas js and joblib library
+
+ backend/dockerfile         |  6 [32m++++[m
+ create-ci-cd-pipeline.txt  | 76 [32m++++++++++++++++++++++++++++++++++++++++++++++[m
+ docker-compose.yml         | 12 [32m++++++++[m
+ frontend/app/api/route.js  | 72 [32m++++++++++++++++++++++[m[31m---------------------[m
+ frontend/dockerfile        | 11 [32m+++++++[m
+ frontend/nginx.conf        |  1 [32m+[m
+ frontend/package-lock.json | 37 [32m++++++[m[31m----------------[m
+ frontend/package.json      |  3 [32m+[m[31m-[m
+ nginx.conf                 | 21 [32m+++++++++++++[m
+ package-lock.json          |  6 [32m++++[m
+ 10 files changed, 181 insertions(+), 64 deletions(-)
+
+[33mcommit 39e89046d75ed21a99b73d9f232a57294d7b98fc[m
+Author: akanksha upadhyay <uakansha1@gmail.com>
+Date:   Wed Mar 19 12:03:01 2025 +0530
+
+    initial commit
+
+ app/globals.css                                 |  42 [31m----[m
+ app/page.js                                     |  95 [31m--------[m
+ app/page.module.css                             | 168 [31m-------------[m
+ backend/__pycache__/main.cpython-312.pyc        | Bin [31m0[m -> [32m1909[m bytes
+ backend/createcsv.py                            |  62 [32m+++++[m
+ backend/loan-pricing.text                       |  64 [32m+++++[m
+ backend/loan_pricing_data.csv                   | 201 [32m++++++++++++++++[m
+ backend/loan_pricing_model.pkl                  | Bin [31m0[m -> [32m1484903[m bytes
+ backend/loan_pricing_train.py                   |  44 [32m++++[m
+ backend/main.py                                 |  40 [32m++++[m
+ backend/requirements.txt                        |  48 [32m++++[m
+ .gitignore => frontend/.gitignore               |   0
+ README.md => frontend/README.md                 |   0
+ frontend/app/api/route.js                       |  38 [32m+++[m
+ {app => frontend/app}/favicon.ico               | Bin
+ frontend/app/form/page.js                       |  35 [32m+++[m
+ frontend/app/form/page.module.css               |  36 [32m+++[m
+ frontend/app/globals.css                        |  38 [32m+++[m
+ {app => frontend/app}/layout.js                 |   0
+ frontend/app/page.css                           |  39 [32m++++[m
+ frontend/app/page.js                            |  54 [32m+++++[m
+ frontend/app/result/page.js                     |  21 [32m++[m
+ frontend/app/result/page.module.css             |  26 [32m+++[m
+ jsconfig.json => frontend/jsconfig.json         |   0
+ next.config.mjs => frontend/next.config.mjs     |   0
+ package-lock.json => frontend/package-lock.json | 298 [32m++++++++++++++++++++++++[m
+ package.json => frontend/package.json           |   6 [32m+[m[31m-[m
+ {public => frontend/public}/file.svg            |   0
+ {public => frontend/public}/globe.svg           |   0
+ {public => frontend/public}/next.svg            |   0
+ {public => frontend/public}/vercel.svg          |   0
+ {public => frontend/public}/window.svg          |   0
+ 32 files changed, 1048 insertions(+), 307 deletions(-)
+
+[33mcommit 5fa02c669ec3a1ef670ead715c618ea7cc470d08[m
+Author: akanksha upadhyay <uakansha1@gmail.com>
+Date:   Fri Feb 21 17:10:22 2025 +0530
+
+    Initial commit from Create Next App
+
+ .gitignore          |  41 [32m+++[m
+ README.md           |  36 [32m+++[m
+ app/favicon.ico     | Bin [31m0[m -> [32m25931[m bytes
+ app/globals.css     |  42 [32m+++[m
+ app/layout.js       |  27 [32m++[m
+ app/page.js         |  95 [32m++++++[m
+ app/page.module.css | 168 [32m++++++++++[m
+ jsconfig.json       |   7 [32m+[m
+ next.config.mjs     |   4 [32m+[m
+ package-lock.json   | 878 [32m++++++++++++++++++++++++++++++++++++++++++++++++++++[m
+ package.json        |  16 [32m+[m
+ public/file.svg     |   1 [32m+[m
+ public/globe.svg    |   1 [32m+[m
+ public/next.svg     |   1 [32m+[m
+ public/vercel.svg   |   1 [32m+[m
+ public/window.svg   |   1 [32m+[m
+ 16 files changed, 1319 insertions(+)
