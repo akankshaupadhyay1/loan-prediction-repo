@@ -10,15 +10,13 @@ services:
     depends_on:
       - backend
     environment:
-      # Full URL including the /predict endpoint
-      - NEXT_PUBLIC_BACKEND_URL=https://loan-app1-g9bgh3fmhfa4fafh.centralindia-01.azurewebsites.net/predict
-  
+      - NEXT_PUBLIC_BACKEND_URL=https://loan1app-ffhthrf4bdcbbnen.centralindia-01.azurewebsites.net/predict  # Added https://
+
   backend:
     image: uakansha1/loan-predict-backend:latest
     container_name: loan-predict-backend
     ports:
-      - "8000:8000"  # Keep default Uvicorn port
+      - "8000:80"  # If backend runs inside container on port 80, map external 8000 to it
     restart: always
     environment:
-      # Uvicorn is running on port 8000
-      - PORT=8000
+      - PORT=80  # Change this only if your backend is actually running on port 80 inside the container
